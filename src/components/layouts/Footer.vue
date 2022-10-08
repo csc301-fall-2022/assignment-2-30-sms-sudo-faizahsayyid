@@ -5,7 +5,9 @@
             <h1 class="text-light text-md">Periwinkle</h1>
         </div>
         <section>
-            <p>© 2022 Periwinkle. All rights reserved. 123 Frogville St. W., Frogland FR R1B 8I7</p>
+            <p class="text-center">
+                <small>© 2022 Periwinkle. All rights reserved. 123 Frogville St. W., Frogland FR R1B 8I7</small>
+            </p>
         </section>
     </footer>
 </template>

@@ -11,7 +11,7 @@
                         <router-link class="nav-link d-flex align-items-center gap-1 justify-content-center" to='/checkout'>
                             <span v-if="cartItemCount" class="checkout-num badge rounded-pill bg-info">{{ cartItemCount }}</span>
                             <ion-icon class="checkout" size="large" name="cart-sharp"></ion-icon>
-                            <div class="checkout" >Checkout</div>
+                            <div class="d-sm-block d-none checkout" >Checkout</div>
                         </router-link>
                     </li>
                 </ul>
