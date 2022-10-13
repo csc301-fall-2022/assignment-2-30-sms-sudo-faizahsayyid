@@ -6,7 +6,8 @@
     <main class="container mt-4 min-vh-100">
       <LoginSignUpModal :showLoginModal='showLoginModal' 
       @close-login-modal="closeLoginModal" 
-      @on-login="onLogin" @on-signup="onSignUp"/>
+      @on-login="onLogin" @on-signup="onSignUp"
+      :error="authError"/>
       <router-view @add-to-cart='addToCart' 
         @increase-quantity='increaseQuantity'
         @decrease-quantity='decreaseQuantity'  
@@ -21,6 +22,7 @@
   import AppHeader from './components/layouts/Header.vue';
   import AppFooter from './components/layouts/Footer.vue';
   import LoginSignUpModal from './components/widgets/LoginSignUpModal.vue';
+  import { signUp, logIn } from './api/auth'; 
 
   export default {
     name: "App",
@@ -33,22 +35,46 @@
       return {
         checkoutCart: [], // ex. [{ id: 1, quantity: 3 }, { id: 2, quantity: 1 }]
         showLoginModal: false,
-        isLoggedIn: false,
+        authError: '',
+        userEmail: '',
+        userId: '',
       }
     },
     computed: {
       cartItemCount() {
         return this.checkoutCart.reduce((prev, curr) => prev + curr.quantity, 0);
+      },
+      isLoggedIn() {
+        return !!this.userId && !!this.userEmail;
       }
     },
+    created() {
+      this.userEmail = localStorage.getItem('userEmail');
+      this.userId = localStorage.getItem('userId');
+      this.checkoutCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
+    },
     methods: {
-      onLogin(email, password) {
-        console.log('Login', email, password);
-        this.closeLoginModal();
+      async onLogin(email, password) {
+        const { data, error } = await logIn(email, password);
+        if (error) {
+          this.authError = error.message;
+        } else {
+          this.userEmail = data.user.email;
+          this.userId = data.user.id;
+          localStorage.setItem('userEmail', this.userEmail);
+          localStorage.setItem('userId', this.userId);
+          this.closeLoginModal();
+        }
       },
-      onSignUp(email, password) {
-        console.log('Sign Up', email, password);
-        this.closeLoginModal();
+      async onSignUp(email, password) {
+        const { data, error } = await signUp(email, password);
+        if (error) {
+          this.authError = error.message;
+        } else {
+          this.userEmail = data.user.email;
+          this.userId = data.user.id;
+          this.closeLoginModal();
+        }
       },
       openLoginModal() {
         this.showLoginModal = true;
@@ -58,6 +84,7 @@
       },
       addToCart(productId) {
         this.checkoutCart = [...this.checkoutCart, {id: productId, quantity: 1}]
+        localStorage.setItem('checkoutCart', JSON.stringify(this.checkoutCart));
       }, 
       increaseQuantity(productId) {
         this.checkoutCart = this.checkoutCart.map((item) => {
@@ -66,6 +93,7 @@
           }
           else return item;
         })
+        localStorage.setItem('checkoutCart', JSON.stringify(this.checkoutCart));
       },
       decreaseQuantity(productId) {
         this.checkoutCart = this.checkoutCart.map((item) => {
@@ -77,6 +105,7 @@
           }
           else return item;
         }).filter((item) => item !== null);
+        localStorage.setItem('checkoutCart', JSON.stringify(this.checkoutCart));
       }
     }
   }
