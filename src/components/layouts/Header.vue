@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="navbar navbar-expand navbar-dark bg-primary py-2 ps-2">
+        <nav class="fixed-top navbar navbar-expand navbar-dark bg-primary py-2 ps-2">
             <div class="container-fluid">
                 <router-link class='d-flex align-items-center gap-3 justify-content-center' to='/'>
                     <ion-icon class="logo-icon" size="large" name="library-sharp"></ion-icon>
@@ -14,9 +14,9 @@
                             <div class="d-sm-block d-none checkout" >Checkout</div>
                         </router-link>
                     </li>
-                    <li v-if="!isLoggedIn" class="login-container d-flex align-items-center gap-1 justify-content-center me-3" @click="$emit('open-login-modal')">
+                    <li class="login-container d-flex align-items-center gap-1 justify-content-center me-3" @click="onLogInOutClick">
                         <ion-icon class="login" name="person-circle-sharp" size="large"></ion-icon>
-                        <div role="button" type="link" class="nav-link login d-sm-block d-none">Log In</div>
+                        <div role="button" type="link" class="nav-link login d-sm-block d-none">{{ logInOutBtnText }}</div>
                     </li>
                 </ul>
             </div>
@@ -31,7 +31,21 @@ export default {
         cartItemCount: Number,
         isLoggedIn: Boolean,
     },
-    emits: ['open-login-modal']
+    computed: {
+        logInOutBtnText() {
+            return this.isLoggedIn ? 'Log Out' : 'Log in';
+        },
+    },
+    methods: {
+        onLogInOutClick() {
+            if(this.isLoggedIn) {
+                this.$emit('log-out');
+            } else {
+                this.$emit('open-login-modal');
+            }
+        }
+    },
+    emits: ['open-login-modal', 'log-out']
 }
 </script>
 
