@@ -17,6 +17,7 @@
                     <input v-model="password" type="password" id="password" class="form-control w-100 px-3" required>
                 </fieldset>
                 <button type="submit" class="btn btn-info w-75 mt-5">{{ submitButtonText }}</button>
+                <p v-if="error" class="text-danger">{{ error }}</p>
             </form>
         </div>
     </div>
@@ -27,6 +28,7 @@ export default {
     name: 'LoginSignUpModal',
     props: {
         showLoginModal: Boolean,
+        error: String,
     },
     data() {
         return {
@@ -47,12 +49,12 @@ export default {
         switchToSignUp() {
             this.isLogin = false;
         },
-        onSubmit(e) {
+        async onSubmit(e) {
             e.preventDefault();
             if (this.isLogin) {
-                this.$emit('on-login', this.email, this.password);
+                await this.$emit('on-login', this.email, this.password);
             } else {
-                this.$emit('on-signup', this.email, this.password);
+                await this.$emit('on-signup', this.email, this.password);
             }
             this.email = "";
             this.password = "";
