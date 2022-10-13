@@ -2,8 +2,9 @@
   <div>
     <AppHeader :cartItemCount='cartItemCount' 
       @open-login-modal="openLoginModal" 
+      @log-out="logOut"
       :isLoggedIn="isLoggedIn"/>
-    <main class="container mt-4 min-vh-100">
+    <main class="container min-vh-100">
       <LoginSignUpModal :showLoginModal='showLoginModal' 
       @close-login-modal="closeLoginModal" 
       @on-login="onLogin" @on-signup="onSignUp"
@@ -54,6 +55,12 @@
       this.checkoutCart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
     },
     methods: {
+      logOut() {
+        this.userEmail = '';
+        localStorage.setItem('userEmail', '');
+        this.userId = '';
+        localStorage.setItem('userId', '');
+      },
       async onLogin(email, password) {
         const { data, error } = await logIn(email, password);
         if (error) {
@@ -110,4 +117,9 @@
     }
   }
 </script>
-  
+
+<style scoped>
+  main {
+    margin-top: 6rem;
+  }
+</style>
