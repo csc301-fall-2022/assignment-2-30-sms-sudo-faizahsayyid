@@ -41,7 +41,7 @@ Due to the nature of the assignment we will be comparing both backend frameworks
 
 1. Express
 
-Express (also known as Express.js) is an open-source framework built specifically for Node.js. It’s completely written in Javascript. This is a large pro because it means we would be using a unified language across both our frontend and backend. There is also extensive support and resources about how to use Express due to its popularity and increased use. A con that is preventing us from committing to using Express is that we have little experience and it usually has many issues in callbacks.
+Express (also known as Express.js) is an open-source framework built specifically for Node.js. It’s completely written in Javascript. This is a large pro because it means we would be using a unified language across both our frontend and backend. There is also extensive support and resources about how to use Express due to its popularity and increased use. A con that is preventing us from committing to using Express is that we have little experience and it usually has many issues in callbacks. To address the maturity of express, which was released in 2010, it has come to develop the ability to support thousands of concurrent actions, and has remained an open-source community. 
 
 2.  Firebase
 
