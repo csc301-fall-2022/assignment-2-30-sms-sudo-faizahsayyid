@@ -14,6 +14,14 @@ module.exports = {
       'extends': [
         'plugin:cypress/recommended'
       ]
+    },
+    {
+      files: [
+        'tests/**.test.js'
+      ],
+      'extends': [
+        'plugin:vue-test-utils/recommended',
+      ]
     }
   ],
   parserOptions: {

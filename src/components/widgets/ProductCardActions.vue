@@ -1,8 +1,8 @@
 <template>
-    <button v-if="!isInCart" @click="$emit('add-to-cart')" :class="addToCartBtnClasses">Add To Cart</button>
-    <div v-else :class="quantityBtnContainerClasses">
+    <button data-test="add-to-cart" v-if="!isInCart" @click="$emit('add-to-cart')" :class="addToCartBtnClasses">Add To Cart</button>
+    <div data-test="plus-minus-quantity" v-else :class="quantityBtnContainerClasses">
         <button @click="$emit('increase-quantity')" class="plus-minus btn btn-primary btn-sm">+</button>
-        <div>{{ quantity }}</div>
+        <div data-test="product-quantity">{{ quantity }}</div>
         <button @click="$emit('decrease-quantity')" class="plus-minus btn btn-primary btn-sm">-</button>
     </div>
 </template>
