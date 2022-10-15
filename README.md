@@ -4,6 +4,8 @@
 
 Visit: https://periwinkle.netlify.app/
 
+The application is automatically deployed when branches are merged to main.
+
 ## Instructions to set up local environment
 
 - Install Node JS (LTS): https://nodejs.org/en/
