@@ -16,6 +16,8 @@ Visit: https://periwinkle.netlify.app/
 - Please follow the above instructions to set up your local environment
 - Run `npm run test` to run our test suite
 
+Currently we are testing product actions under regular conditions, but in the future we would want to test each interaction that the user might do interacting with our front end  (making sure each button routes to the correct view). Additional we would want to incorporate end-to-end testing (which Cypress is set-up for) but has not been implemented yet.
+
 ## Instructions to view short report
 
 Short report is viewable in main branch under [report.md](report.md). 
