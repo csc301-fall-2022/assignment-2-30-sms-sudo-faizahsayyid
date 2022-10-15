@@ -1,13 +1,20 @@
 <template>
     <section v-if="product" class="mb-3">
-        <div class="row align-items-center">
+        <div class="row align-items-center gap-2">
 
-            <img class="col-1" v-bind:src="product.image" />
-            <h2 class="h4 col">{{ product.title }}</h2> 
+            <div class="col-12 col-sm-2 d-flex justify-content-center">
+                <img class="w-75" v-bind:src="product.image" />
+            </div>
 
-            <p class="col">${{ product.price }}</p> 
+            <div class="col-12 col-sm-2 d-flex justify-content-center text-center">
+                <h2 class="h3">{{ product.title }}</h2> 
+            </div>
 
-            <ProductCardActions class="col" @add-to-cart="$emit('add-to-cart')"
+            <div class="col-12 col-sm-1 d-flex justify-content-center align-items-center">
+                <p class="mb-0">${{ product.price }}</p> 
+            </div>
+
+            <ProductCardActions class="my-2 col d-flex justify-content-center"
                     @increase-quantity="$emit('increase-quantity')" 
                     @decrease-quantity="$emit('decrease-quantity')"
                     :isInCart="true"
@@ -15,7 +22,9 @@
                     :isForSmallScreen="false"
                     :isForCheckout="true"/>
 
-            <button class="btn btn-danger col-1" type="button" @click="$emit('remove-from-cart')">Remove</button>
+            <div class="col-12 col-sm-2 d-flex justify-content-center justify-content-sm-end">
+                <button class="btn btn-danger" type="button" @click="$emit('remove-from-cart')">Remove</button>
+            </div>
                     
         </div>
     </section>
@@ -37,11 +46,6 @@ export default {
     created() {
         console.log(this.product)
     },
-    // computed:{
-    //     quantity(){
-    //         return this.checkoutCart.find(item => item.id === this.product.id).quantity
-    //     }
-    // },
-    emits: ['add-to-cart', 'increase-quantity', 'decrease-quantity', 'remove-from-cart']
+    emits: ['increase-quantity', 'decrease-quantity', 'remove-from-cart']
 }
 </script>

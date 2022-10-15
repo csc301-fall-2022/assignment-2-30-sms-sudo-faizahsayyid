@@ -26,7 +26,6 @@
   import AppFooter from './components/layouts/Footer.vue';
   import LoginSignUpModal from './components/widgets/LoginSignUpModal.vue';
   import { signUp, logIn } from './api/auth'; 
-import { removeItemAsync } from '@supabase/gotrue-js/dist/module/lib/helpers';
 
   export default {
     name: "App",

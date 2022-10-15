@@ -24,12 +24,16 @@ export default {
             ]
         },
         quantityBtnContainerClasses() {
-            return [
+            if (this.isForCheckout) {
+                return ["d-flex w-100 justify-content-center gap-3 align-items-center"]
+            } else {
+                return [
                 this.isForSmallScreen ? 
                     "d-md-none d-flex w-100 justify-content-center" : 
                     "d-md-flex d-none", 
                 "gap-3 align-items-center"
-            ]
+                ]
+            }
         },
         disableDecrease() {
             return this.quantity <= 1 && this.isForCheckout
