@@ -11,7 +11,9 @@
       :error="authError"/>
       <router-view @add-to-cart='addToCart' 
         @increase-quantity='increaseQuantity'
-        @decrease-quantity='decreaseQuantity'  
+        @decrease-quantity='decreaseQuantity'
+        @remove-from-cart='removeFromCart'
+        @clear-cart='clearCart'
         :checkoutCart='checkoutCart'>
       </router-view>
     </main>
@@ -24,6 +26,7 @@
   import AppFooter from './components/layouts/Footer.vue';
   import LoginSignUpModal from './components/widgets/LoginSignUpModal.vue';
   import { signUp, logIn } from './api/auth'; 
+import { removeItemAsync } from '@supabase/gotrue-js/dist/module/lib/helpers';
 
   export default {
     name: "App",
@@ -113,6 +116,13 @@
           else return item;
         }).filter((item) => item !== null);
         localStorage.setItem('checkoutCart', JSON.stringify(this.checkoutCart));
+      },
+      removeFromCart(productID) {
+        this.checkoutCart = this.checkoutCart.filter((item) => item.id !== productID);
+      },
+      clearCart(){
+        this.checkoutCart = []
+        localStorage.clear("checkoutCart")
       }
     }
   }

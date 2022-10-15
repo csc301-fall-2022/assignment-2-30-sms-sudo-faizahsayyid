@@ -11,6 +11,6 @@ export async function getProductsByIds(ids) {
     let { data: product } = await supabase
         .from('product')
         .select('*')
-        .in(ids);
+        .in("id", ids);
     return product;
 }
